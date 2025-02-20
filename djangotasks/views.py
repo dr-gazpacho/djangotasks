@@ -1,8 +1,8 @@
 from django.shortcuts import render
 
 def index(request):
-    hello_world = "Hello world"
+    body = "this is the body of the application"
     context = {
-        "hello_world": hello_world
+        "application_index": body
     }
     return render(request, "djangotasks/index.html", context)
