@@ -1,16 +1,14 @@
 from django.db import models
+from django.contrib.auth.models import User
 from django.utils import timezone
 
-class User(models.Model):
-    username = models.CharField(max_length=200, unique=True)
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     tasks_completed = models.IntegerField(default=0)
-
-    # this is for the debugger - without this it would return a generic name for this like User object (1)
-    def __str__(self):
-        return self.username
     
-    # Django automatically creates a reverse relationship named modelname_set when you define a foreign key.
-    # Since we have a Task model with a foreign key to User, Django creates a task_set attribute on each User instance that provides access to all related Task objects. 
+    def __str__(self):
+        return self.user.username
+    
     def completed_tasks_count(self):
         return self.task_set.filter(is_complete=True).count()
 

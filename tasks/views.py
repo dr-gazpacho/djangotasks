@@ -3,11 +3,9 @@ from django.http import JsonResponse
 from .models import User, Task
 
 def index(request):
+    print(request.user)
     tasks = Task.objects.all()
-    print(tasks)
-    tasks_body= "this is the body of the tasks"
     context = {
-        "tasks_index": tasks_body,
         "tasks_total": tasks
     }
     return render(request, "tasks/index.html", context)
