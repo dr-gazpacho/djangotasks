@@ -10,13 +10,36 @@
     <div>
         {{ tasks_index }}
     </div>
-    <div>
-        {% for entry in tasks_total %}
-        <p>
-            {{ entry.task_name }}
-        </p>
-        {% endfor %}
-    </div>
+    <table>
+
+        <caption>
+            A list of very important chores
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Description</th>
+              <th scope="col">Date Added</th>
+              <th scope="col">Date Complete</th>
+              <th scope="col">Deadline</th>
+              <th scope="col">Is Completed?</th>
+              <th scope="col">Completed By</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for entry in tasks_total %}
+                <tr>
+                    <th scope="row">{{entry.task_name}}</th>
+                    <td>{{entry.description}}</td>
+                    <td>{{entry.date_added}}</td>
+                    <td>{{entry.date_completed}}</td>
+                    <td>{{entry.date_deadline}}</td>
+                    <td>{{entry.is_complete}}</td>
+                    <td>{{entry.completed_by}}</td>
+                </tr>
+            {% endfor %}
+          </tbody>
+    </table>
 
 </body>
 <script type="text/javascript" src="{% static 'tasks/script.js' %}"></script>
