@@ -7,7 +7,17 @@
     <title>Document</title>
 </head>
 <body>
-    {{ tasks_index }}
+    <div>
+        {{ tasks_index }}
+    </div>
+    <div>
+        {% for entry in tasks_total %}
+        <p>
+            {{ entry.task_name }}
+        </p>
+        {% endfor %}
+    </div>
+
 </body>
 <script type="text/javascript" src="{% static 'tasks/script.js' %}"></script>
 </html>
