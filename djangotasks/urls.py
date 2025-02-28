@@ -21,6 +21,8 @@ from djangotasks import views as root_views
 
 urlpatterns = [
     path('', root_views.index, name="root_view"),
+    path('login/', root_views.login_view, name='login'),
+    path('logout/', root_views.logout_view, name='logout'),
     path('tasks/', include('tasks.urls')),
     path('admin/', admin.site.urls),
 ]
