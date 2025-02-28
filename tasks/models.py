@@ -20,9 +20,9 @@ class User(models.Model):
 class Task(models.Model):
     task_name = models.CharField(max_length=200)
     description = models.CharField(max_length=500)
-    date_added = models.DateTimeField()
-    date_completed = models.DateTimeField()
-    date_deadline = models.DateTimeField()
+    date_added = models.DateTimeField(null=True, blank=True)
+    date_completed = models.DateTimeField(null=True, blank=True)
+    date_deadline = models.DateTimeField(null=True, blank=True)
     is_complete = models.BooleanField(default=False)
 
     completed_by = models.ForeignKey(
@@ -41,5 +41,5 @@ class Task(models.Model):
         self.save()
 
     def __str__(self):
-        return self.name
+        return self.task_name
 
