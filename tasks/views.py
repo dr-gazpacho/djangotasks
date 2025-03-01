@@ -13,7 +13,7 @@ def index(request):
 def delete(request, task_id):
     print(task_id)
     print("doing it")
-    return redirect('tasks:tasks')
+    return redirect('tasks:tasks_list')
 
 def api(request):
     print(request)
