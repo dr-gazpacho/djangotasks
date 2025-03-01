@@ -7,6 +7,15 @@
     <title>Document</title>
 </head>
 <body>
+    {% if user.is_authenticated %}
+    <div class="user-info">
+        <p>You are logged in as <strong>{{ user.username }}</strong></p>
+        <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-logout">Log Out</button>
+        </form>
+    </div>
+    {% endif %}
     <table>
         <caption>
             A list of very important chores
@@ -20,6 +29,9 @@
               <th scope="col">Deadline</th>
               <th scope="col">Is Completed?</th>
               <th scope="col">Completed By</th>
+              {% if user.is_staff %}
+              <th>Delete?</th>
+              {% endif %}
             </tr>
           </thead>
           <tbody>
@@ -32,6 +44,15 @@
                     <td>{{entry.date_deadline}}</td>
                     <td>{{entry.is_complete}}</td>
                     <td>{{entry.completed_by}}</td>
+                    {% if user.is_staff %}
+                    <!-- tasks:delete_task connects back to the name of the URL -->
+                    <td>
+                    <form method="post" action="{% url 'tasks:delete_task' entry.id %}">
+                      {% csrf_token %}
+                      <button type="submit" class="btn btn-delete">Delete</button>
+                    </form>
+                    {% endif %}
+                    </td>
                 </tr>
             {% endfor %}
           </tbody>

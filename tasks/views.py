@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from .models import User, Task
 
@@ -9,6 +9,11 @@ def index(request):
         "tasks_total": tasks
     }
     return render(request, "tasks/index.html", context)
+
+def delete(request, task_id):
+    print(task_id)
+    print("doing it")
+    return redirect('tasks:tasks')
 
 def api(request):
     print(request)
