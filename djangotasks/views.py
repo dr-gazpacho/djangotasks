@@ -14,7 +14,7 @@ def index_login(request):
                 login(request, user)
                 # messages.success(request, f"Welcome, {username}!") -> this was from when I didn't redirect
                 # uses name= property from urls.py - since tasks is in another app, I need to namespace this to the app
-                return redirect('tasks:tasks')
+                return redirect('tasks:tasks_list')
             else:
                 messages.error(request, "Invalid username or password.")
         else:

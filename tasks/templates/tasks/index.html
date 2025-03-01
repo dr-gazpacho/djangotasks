@@ -32,6 +32,9 @@
               {% if user.is_staff %}
               <th>Delete?</th>
               {% endif %}
+              {% if not user.is_staff and user.is_authenticated %}
+              <th>Mark as Done</th>
+              {% endif %}
             </tr>
           </thead>
           <tbody>
@@ -44,6 +47,19 @@
                     <td>{{entry.date_deadline}}</td>
                     <td>{{entry.is_complete}}</td>
                     <td>{{entry.completed_by}}</td>
+                    {% if user.is_authenticated and not user.is_staff %}
+                    <!-- tasks:delete_task connects back to the name of the URL -->
+                    <td>
+                      {% if not entry.is_complete %}
+                        <form method="post" action="{% url 'tasks:complete_task' entry.id %}">
+                          {% csrf_token %}
+                          <button type="submit" class="btn btn-complete">Mark as Done</button>
+                        </form>
+                        {% else %}
+                        <p>tis done</p>
+                      {% endif %}
+                    {% endif %}
+                    </td>
                     {% if user.is_staff %}
                     <!-- tasks:delete_task connects back to the name of the URL -->
                     <td>
