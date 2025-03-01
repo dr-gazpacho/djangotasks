@@ -3,7 +3,6 @@ from django.http import JsonResponse
 from .models import User, Task
 
 def index(request):
-    print(request.user)
     tasks = Task.objects.all()
     context = {
         "tasks_total": tasks
@@ -11,8 +10,8 @@ def index(request):
     return render(request, "tasks/index.html", context)
 
 def delete(request, task_id):
-    print(task_id)
-    print("doing it")
+    task = Task.objects.get(pk=task_id)
+    task.delete()
     return redirect('tasks:tasks_list')
 
 def api(request):
